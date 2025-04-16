@@ -12,9 +12,15 @@ export function SearchBar({ onSearch }: Props) {
 
   const { data, error, isLoading } = useQuery<Location[], Error>({
     queryKey: ["searchWeatherLocation", query],
-    queryFn: () => searchWeatherLocation(query),
+    queryFn: async () => {
+      const locations = await searchWeatherLocation(query);
+      return locations.map(location => ({
+        ...location,
+        id: location.id.toString(),
+      }));
+    },
     enabled: !!query && query.length >= 2,
-    keepPreviousData: true,
+    staleTime: 5000,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -87,33 +93,27 @@ export function SearchBar({ onSearch }: Props) {
                     {`   Error: ${error?.message}`}
                   </p>
                 )
-              : data && data?.length > 0
-                ? (
-                    <ul>
-                      {data.map(location => (
-                        <li
-                          key={location?.id}
-                        >
-                          <button
-                            type="submit"
-                            onClick={() => handleLocationSelect(location?.name, location?.region)}
-                            className="flex gap-[0.5rem] items-center px-4 py-3 hover:bg-blue-900/50 text-left min-w-full"
-                          >
-                            <HiLocationMarker className="text-blue-400 " />
-                            <div>
-                              <p className="text-white font-medium">{location?.name}</p>
-                              <p className="text-blue-300 text-xs">{location?.region}</p>
-                            </div>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )
-                : (
-                    <div className="text-blue-200  ">
-                      No locations found.
-                    </div>
-                  )}
+              : Array.isArray(data) && (
+                <ul>
+                  {data.map(location => (
+                    <li
+                      key={location?.id}
+                    >
+                      <button
+                        type="submit"
+                        onClick={() => handleLocationSelect(location?.name, location?.region)}
+                        className="flex gap-[0.5rem] items-center px-4 py-3 hover:bg-blue-900/50 text-left min-w-full"
+                      >
+                        <HiLocationMarker className="text-blue-400 " />
+                        <div>
+                          <p className="text-white font-medium">{location?.name}</p>
+                          <p className="text-blue-300 text-xs">{location?.region}</p>
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
         </div>
       )}
 
