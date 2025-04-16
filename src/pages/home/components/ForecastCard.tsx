@@ -2,7 +2,7 @@ import Card from "../../../component/Card";
 
 export function ForecastCard({ day, src, temp, i }: { day: string; src: string; temp: number; i: string }) {
   return (
-    <Card className="bg-blue-900/30 rounded-lg p-4 flex flex-col items-center transition-transform hover:scale-105">
+    <Card className="flex-col ">
       <p className="font-medium text-blue-200">
         {i === "0" ? "Today" : day}
       </p>

@@ -16,7 +16,7 @@ function ForecastPart({ nearbyHours, forecastData }: ForecastProps) {
   // console.log("weeklyData", weeklyData);
 
   return (
-    <div className="backdrop-blur-sm  flex flex-col gap-[2rem] ">
+    <div className=" flex flex-col gap-[2rem] ">
       <div className="flex flex-col md:flex-row justify-between gap-[2rem] items-center">
         <h2 className="text-xl md:text-2xl font-semibold w-full sm:text-left text-center">
           {`${mode === "hour" ? "Hourly" : "Weekly"}  Forecast`}
@@ -50,10 +50,10 @@ function ForecastPart({ nearbyHours, forecastData }: ForecastProps) {
                     nearbyHours.map((hourData, index) => (
                       <ForecastCard
                         key={index}
-                        day={hourData.time.split(" ")[1]}
-                        src={hourData.condition.icon}
-                        temp={hourData.temp_c}
-                        i={hourData.time.split(" ")[0]}
+                        day={hourData?.time.split(" ")[1]}
+                        src={hourData?.condition.icon}
+                        temp={hourData?.temp_c}
+                        i={hourData?.time.split(" ")[0]}
 
                       />
                     ))
@@ -72,8 +72,8 @@ function ForecastPart({ nearbyHours, forecastData }: ForecastProps) {
                       <ForecastCard
                         key={index}
                         day={formatDate(day.date)}
-                        src={day.day.condition.icon}
-                        temp={day.day.avgtemp_c}
+                        src={day?.day?.condition.icon}
+                        temp={day?.day?.avgtemp_c}
                         i={index}
 
                       />

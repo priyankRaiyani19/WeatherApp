@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { Loader } from "../../component/common/Loader";
+import { Loader } from "../../component/Loader";
 import { useCurrentLocation } from "../../hooks/LocationContext";
 import { fetchCurrentWeather, fetchForecastWeather } from "../../service/products/Api";
 import AstroInfo from "./components/Astronomy";
@@ -41,15 +41,14 @@ function Home() {
 
   return (
     <div className="min-h-screen w-full max-w-6xl  text-white mx-auto p-6">
-      <header className="flex flex-col md:flex-row justify-between items-center mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
         <div className="text-2xl font-semibold text-blue-200">
-          {currentWeather?.location?.localtime?.split(" ")[0] || "Loading date..."}
+          {currentWeather?.location?.localtime?.split(" ")[0] }
         </div>
-
         <div className="text-2xl md:text-3xl font-bold tracking-tight mt-2 md:mt-0">
-          {currentWeather && `${currentWeather.location.name}, ${currentWeather.location.country}`}
+          {currentWeather && `${currentWeather?.location?.name}, ${currentWeather?.location?.country}`}
         </div>
-      </header>
+      </div>
 
       <div className="flex flex-col gap-8">
         {isCurrentLoading
@@ -59,7 +58,7 @@ function Home() {
           : currentError
             ? (
                 <div className="bg-red-900/50 p-6 rounded-2xl shadow-lg">
-                  <p className="text-red-200 text-center">{currentError.message}</p>
+                  <p className="text-red-200 text-center">{currentError?.message}</p>
                 </div>
               )
             : (
@@ -69,15 +68,11 @@ function Home() {
         {astro && <AstroInfo astro={astro} />}
 
         {isForecastLoading
-          ? (
-              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 shadow-lg">
-                <Loader />
-              </div>
-            )
+          ? ("")
           : forecastError
             ? (
                 <div className="bg-red-900/50 p-6 rounded-2xl shadow-lg">
-                  <p className="text-red-200 text-center">{forecastError.message}</p>
+                  <p className="text-red-200 text-center">{forecastError?.message}</p>
                 </div>
               )
             : (

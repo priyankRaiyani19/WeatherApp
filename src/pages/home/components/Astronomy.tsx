@@ -34,18 +34,18 @@ const astroInfo = [
 function AstroInfo({ astro }: AstroInfoProps) {
   const newAstro = astroInfo.map(a => ({
     ...a,
-    value: astro[a.key],
+    value: astro[a?.key],
   }));
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
 
       {newAstro.map(astroItem => (
-        <Card key={astroItem.key} className="bg-gradient-to-br  p-4 rounded-lg">
+        <Card key={astroItem?.key} className="bg-gradient-to-br  p-4 rounded-lg">
           <div className="flex flex-col items-center text-center">
-            {astroItem.icon}
-            <h2 className="text-xl font-semibold text-white">{astroItem.title}</h2>
-            <p className="text-lg text-gray-200">{astroItem.value}</p>
+            {astroItem?.icon}
+            <h2 className="text-xl font-semibold text-white">{astroItem?.title}</h2>
+            <p className="text-lg text-gray-200">{astroItem?.value}</p>
           </div>
         </Card>
       ))}

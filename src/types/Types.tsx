@@ -88,22 +88,18 @@ export type LocationContextType = {
 };
 
 export type AstroInfoProps = {
-
   astro: any;
 };
 
 export type ForecastDay = {
   date: string;
   day: {
-
     avgtemp_c: number;
-
     condition: {
       text: string;
       icon: string;
     };
   };
-
 };
 
 export type ForecastProps = {

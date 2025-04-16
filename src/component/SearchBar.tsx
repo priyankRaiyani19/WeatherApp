@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { HiLocationMarker, HiSearch } from "react-icons/hi";
 
-import type { Location, Props } from "../../types/Types";
+import type { Location, Props } from "../types/Types";
 
-import { searchWeatherLocation } from "../../service/products/Api";
+import { searchWeatherLocation } from "../service/products/Api";
 
 export function SearchBar({ onSearch }: Props) {
   const [query, setQuery] = useState("");
@@ -67,7 +67,6 @@ export function SearchBar({ onSearch }: Props) {
         <button
           type="submit"
           className="bg-blue-600 hover:bg-blue-700 text-white p-3.5 rounded-r-full transition-colors"
-          aria-label="Search"
         >
           <HiSearch size={20} />
         </button>
@@ -93,17 +92,17 @@ export function SearchBar({ onSearch }: Props) {
                     <ul>
                       {data.map(location => (
                         <li
-                          key={location.id}
+                          key={location?.id}
                         >
                           <button
                             type="submit"
-                            onClick={() => handleLocationSelect(location.name, location.region)}
+                            onClick={() => handleLocationSelect(location?.name, location?.region)}
                             className="flex gap-[0.5rem] items-center px-4 py-3 hover:bg-blue-900/50 text-left min-w-full"
                           >
                             <HiLocationMarker className="text-blue-400 " />
                             <div>
-                              <p className="text-white font-medium">{location.name}</p>
-                              <p className="text-blue-300 text-xs">{location.region}</p>
+                              <p className="text-white font-medium">{location?.name}</p>
+                              <p className="text-blue-300 text-xs">{location?.region}</p>
                             </div>
                           </button>
                         </li>

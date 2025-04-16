@@ -1,6 +1,6 @@
 import { IoPartlySunnySharp } from "react-icons/io5";
 
-import { useCurrentLocation } from "../../hooks/LocationContext";
+import { useCurrentLocation } from "../hooks/LocationContext";
 import { SearchBar } from "./SearchBar";
 
 function Header() {
