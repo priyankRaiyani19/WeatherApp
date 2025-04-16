@@ -74,7 +74,7 @@ function ForecastPart({ nearbyHours, forecastData }: ForecastProps) {
                         day={formatDate(day.date)}
                         src={day?.day?.condition.icon}
                         temp={day?.day?.avgtemp_c}
-                        i={index}
+                        i={index.toString()}
 
                       />
                     ))
